@@ -1,1 +1,3 @@
-# bento
+# inv
+
+INVENTORY TEMPLATE
