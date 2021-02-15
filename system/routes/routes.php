@@ -1,7 +1,7 @@
 <?php
 
 // $url = urlencode(serialize($array));
-$base_name = 'inv';
+$base_name = BASE_NAME;
 $uri = $_SERVER['REQUEST_URI'];
 $request = explode('?', $_SERVER['REQUEST_URI'], 2);
 $routes = str_replace("/".$base_name."/system", "", $request[0]);

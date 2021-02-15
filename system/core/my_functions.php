@@ -245,11 +245,7 @@
 			'content'	=> $content,
 			'module'	=> $module,
 			'user'		=> $current_user,
-<<<<<<< Updated upstream
 			'date'		=> date("Y-m-d")
-=======
-			'date'		=> date("Y-m-d")	
->>>>>>> Stashed changes
 		);
 		$res = FM_INSERT_QUERY("tbl_logs", $data);
 		//return $res;

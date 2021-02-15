@@ -1,7 +1,8 @@
 <?php 
 error_reporting(0);
 define("SYSTEM_NAME", "bento");
-define("BASE_PATH", "http://localhost:8080/inv/");
+define("BASE_NAME", "bento");
+define("BASE_PATH", "http://localhost:8000/".BASE_NAME."/");
 define("APP_FOLDER", "system/");
 define("VIEWS_FOLDER", "views/");
 // GLOBALS DATABASE CONFIG AND OTHERS
