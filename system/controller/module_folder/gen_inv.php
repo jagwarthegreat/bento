@@ -30,8 +30,8 @@ foreach($result as $item){
     $list['srp'] = number_format($item['selling_price'], 2);
     $list['inv'] = array();
     $balance = 0;
-    $q = mysql_query("SELECT * FROM tbl_product_unit WHERE category = '$inv_cat'");
-    while($row = mysql_fetch_array($q)){
+    $q = mysqli_query($conn, "SELECT * FROM tbl_product_unit WHERE category = '$inv_cat'");
+    while($row = mysqli_fetch_array($conn, $q)){
         $perunit = (float) getInvPerUnit($inv_date, $current_branch, $item[id], $row[id]);
         $list['inv'][$row[id]] = $perunit;
         $balance += ($perunit*$row[qty])*$item['selling_price'];
@@ -59,7 +59,7 @@ function getInvPerUnit($invdate, $branch, $product, $unit)
 
 function inINV($invdate, $branch, $product, $unit)
 {
-    $purchaseResult = mysql_fetch_array(mysql_query("SELECT pod.product, pod.unit, SUM(pod.qty) AS inv_in_qty FROM tbl_purchase_header AS poh, tbl_purchase_detail AS pod, tbl_product_unit AS prodU WHERE poh.id = pod.po_header_id AND pod.unit = prodU.id AND poh.date <= '$invdate' AND poh.branch = '$branch' AND pod.product = '$product' AND pod.unit = '$unit' AND poh.`status` = 1 GROUP BY pod.unit"));
+    $purchaseResult = mysqli_fetch_array($conn, mysqli_query($conn, "SELECT pod.product, pod.unit, SUM(pod.qty) AS inv_in_qty FROM tbl_purchase_header AS poh, tbl_purchase_detail AS pod, tbl_product_unit AS prodU WHERE poh.id = pod.po_header_id AND pod.unit = prodU.id AND poh.date <= '$invdate' AND poh.branch = '$branch' AND pod.product = '$product' AND pod.unit = '$unit' AND poh.`status` = 1 GROUP BY pod.unit"));
 
     $conversionIN = FM_SELECT_QUERY("SUM(pc.to_qty)", "tbl_products AS p, tbl_product_convert AS pc ", "p.id = pc.product AND pc.convert_date <= '$invdate' AND pc.branch = '$branch' AND pc.product = '$product' AND pc.to_unit = '$unit' AND pc.`status` = 1 GROUP BY pc.to_unit");
 

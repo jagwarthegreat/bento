@@ -1,7 +1,8 @@
 <?php 
 error_reporting(0);
 define("SYSTEM_NAME", "bento");
-define("BASE_PATH", "http://localhost:8080/inv/");
+define("BASE_NAME", "bento");
+define("BASE_PATH", "http://localhost:8000/".BASE_NAME."/");
 define("APP_FOLDER", "system/");
 define("VIEWS_FOLDER", "views/");
 // GLOBALS DATABASE CONFIG AND OTHERS
@@ -29,10 +30,9 @@ define("VIEWS_FOLDER", "views/");
 	$username = $GLOBALS['config']['mysql']['username'];
 	$password = $GLOBALS['config']['mysql']['password'];
 
-	@mysql_connect($host, $username, $password, $database) or die(mysql_error());
-	@mysql_select_db($database) or die(mysql_error());
-	@mysql_query("SET SESSION sql_mode=''");
-
+	$conn = mysqli_connect($host, $username, $password, $database) or die(mysqli_connect_errno());
+	mysqli_select_db($conn, $database) or die(mysqli_error($conn));
+	mysqli_query($conn, "SET SESSION sql_mode=''");
 
 // INCLUDE ALL FUNCTIONS
 	foreach(unserialize(VALUE) as $val){
