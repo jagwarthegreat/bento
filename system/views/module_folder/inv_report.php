@@ -49,7 +49,7 @@ echo $ProdInvClass->header();
             date: inv_date,
             cat: inv_cat
         },function(data,status){
-            var inv_json = JSON.parse(data);
+            var inv_json = JSON.parse(data); 
             // var inv_list = inv_json[0];
             var skin_inv = "", item_qty = [];
 

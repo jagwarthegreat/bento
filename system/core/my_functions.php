@@ -6,8 +6,8 @@
 		(`".implode('`,`', $fields)."`)
 		VALUES('".implode("','", $form_data)."')";
 
-		$return_insert = mysqli_query($conn, $sql)or die(mysqli_error($conn));
-		$lastID = mysqli_insert_id($conn);
+		$return_insert = mysql_query($sql)or die(mysql_error());
+		$lastID = mysql_insert_id();
 
 		$ret_ = ($last_id == 'Y')?$lastID:1;
 		return ($return_insert)?$ret_:0;
@@ -17,21 +17,21 @@
 		$fields = array_keys($form_data);
 		$inject = ($where_clause=='')?"":"WHERE $where_clause";
 		$sql = "INSERT INTO ".$table_name." (`".implode('`,`', $fields)."`) SELECT ".implode(",", $form_data)." FROM $select_table $inject";
-		$return_insert = mysqli_query($conn, $sql);
+		$return_insert = mysql_query($sql);
 		return ($return_insert)?1:0;
 	}
 
 	function FM_SELECT_QUERY($type , $table , $params = ''){
 		$inject = ($params=='')?"":"WHERE $params";
-		$select_query = mysqli_query($conn, "SELECT $type FROM $table $inject") or die(mysqli_error($conn));
-		$fetch = mysqli_fetch_array($conn, $select_query);
+		$select_query = mysql_query("SELECT $type FROM $table $inject") or die(mysql_error());
+		$fetch = mysql_fetch_array($select_query);
 		return $fetch;
 	}
 
 	function FM_SELECT_LOOP_QUERY($type , $table , $params = ''){
 		$inject = ($params=='')?"":"WHERE $params";
-		$fetch = mysqli_query($conn, "SELECT $type FROM $table $inject")or die(mysqli_error($conn));
-		while ($row = mysqli_fetch_array($conn, $fetch)) {
+		$fetch = mysql_query("SELECT $type FROM $table $inject")or die(mysql_error());
+		while ($row = mysql_fetch_array($fetch)) {
 			$data[] = $row;
 		}
 		return $data;
@@ -55,7 +55,7 @@
 		$sql .= implode(', ', $sets);
 		$sql .= $whereSQL;
 
-		$return_query = mysqli_query($conn, $sql);
+		$return_query = mysql_query($sql);
 		return ($return_query)?1:0;
 	}
 
@@ -69,12 +69,12 @@
 			}
 		}
 		$sql = "DELETE FROM ".$table_name.$whereSQL;
-		$return_delete = mysqli_query($conn, $sql);
+		$return_delete = mysql_query($sql);
 		return ($return_delete)?1:0;
 	}
 
 	function FM_QUERY($query){
-		$r = mysqli_query($conn, $query);
+		$r = mysql_query($query);
 		return ($r)?1:0;
 	}
 
@@ -83,7 +83,7 @@
 		if(get_magic_quotes_gpc()) {
 			$str = stripslashes($str);
 		}
-		return mysqli_real_escape_string($conn, $str);
+		return mysql_real_escape_string($str);
 	}
 
 	function sidebar_parent($active_li,$tree,$menu = 0){
@@ -245,7 +245,11 @@
 			'content'	=> $content,
 			'module'	=> $module,
 			'user'		=> $current_user,
+<<<<<<< Updated upstream
 			'date'		=> date("Y-m-d")
+=======
+			'date'		=> date("Y-m-d")	
+>>>>>>> Stashed changes
 		);
 		$res = FM_INSERT_QUERY("tbl_logs", $data);
 		//return $res;

@@ -19,7 +19,7 @@
   </a>
   <ul class="nav nav-treeview">
     <?=sidebar_li("Purchase","purchase",$active_li)?>
-    <?=sidebar_li("Product Repack","product-convert",$active_li)?>
+    <?=sidebar_li("Product Convert","product-convert",$active_li)?>
     <?=sidebar_li("Sales","sales",$active_li)?>
   </ul>
 </li>
