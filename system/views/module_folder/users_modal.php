@@ -19,15 +19,15 @@
                                     </div>
 									<div class='form-group'>
                                         <label for='cat_name'>Userame</label>
-                                        <input type='text' class='form-control' id='cat_name' placeholder='category name' autocomplete='off'>
+                                        <input type='text' class='form-control' id='user_username' placeholder='username' autocomplete='off'>
                                     </div>
 									<div class='form-group'>
                                         <label for='cat_name'>Email</label>
-                                        <input type='text' class='form-control' id='cat_name' placeholder='category name' autocomplete='off'>
+                                        <input type='text' class='form-control' id='user_email' placeholder='user email' autocomplete='off'>
                                     </div>
 									<div class='form-group'>
                                         <label for='cat_name'>Default Password</label>
-                                        <input type='text' class='form-control' id='cat_name' placeholder='category name' autocomplete='off'>
+                                        <input type='password' class='form-control' id='user_pass' autocomplete='off'>
                                     </div>
 									<div class='form-group'>
                                         <label for='user_role'>Role</label>
@@ -37,7 +37,7 @@
                                     </div>
 
                                     <div class='d-flex' style='justify-content: space-between;'>
-                                        <button type='button' onclick='saveCatChanges()' id='prod_sc_branch' class='btn btn-success btn-sm'>Save changes</button>
+                                        <button type='button' onclick='saveUser()' id='prod_sc_branch' class='btn btn-success btn-sm'>Save changes</button>
                                         <button type='button' class='btn btn-default btn-sm' id='prod_c_branch' data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>

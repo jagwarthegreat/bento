@@ -79,6 +79,9 @@ function loadSysUsersData() {
 				"data": "email"
 			},
 			{
+				"data": "role"
+			},
+			{
 				"mRender": function(data,type,row){
 					const stats = (row.status == 0) ? '<span style="color: green;">Visible</span>' : '<span style="color: gray;">Hidden</span>' ;
 					return stats;
@@ -99,5 +102,23 @@ function setActiveTab(tab) {
 
 function addUserModal() {
 	$("#settings_users_modal").modal('show');
+}
+
+function saveUser() {
+	var user_id = $("#user_name").val();
+	var user_username = $("#user_username").val();
+	var user_email = $("#user_email").val();
+	var user_pass = $("#user_pass").val();
+	var user_role = $("#user_role").val();
+
+	$.post(controller+"saveUser.php",{
+		user_id: user_id,
+		user_username: user_username,
+		user_email: user_email,
+		user_pass: user_pass,
+		user_role: user_role
+	},function(data){
+		location.reload();
+	});
 }
 </script>

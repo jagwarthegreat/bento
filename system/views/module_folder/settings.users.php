@@ -21,6 +21,7 @@
 					<th>FULL NAME</th>
 					<th>USERNAME</th>
 					<th>EMAIL</th>
+					<th>ROLE</th>
 					<th style="width: 90px;">STATUS</th>
 				</tr>
 			</thead>

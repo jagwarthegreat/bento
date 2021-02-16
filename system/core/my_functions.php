@@ -266,5 +266,11 @@
 		}
 		return $data;
 	}
+
+	function getEmployeeName($employee_id)
+	{
+		$data = FM_SELECT_QUERY("fullname","tbl_employee","id = '$employee_id'");
+		return $data[0];
+	}
 	
 ?>

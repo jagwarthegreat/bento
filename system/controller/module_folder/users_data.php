@@ -11,7 +11,8 @@ foreach($result as $list){
         'name' => clean($list["fullname"]),
         'username' => clean($list["username"]),
         'email' => clean($list["email"]),
-        'status' => $list[status]
+        'status' => $list[status],
+        'role' => employeePositionName($list[role_id])
 	];
     array_push($response['data'], $data);
 }
