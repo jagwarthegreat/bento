@@ -10,7 +10,7 @@
  *   Created on  :: January 2020
  *   Last Update :: March 12, 2020
  */
-class ProductConvertClass
+class Settings
 {
 	function __construct($param = '')
 	{
@@ -19,23 +19,16 @@ class ProductConvertClass
 
 	public function header()
 	{
-		return '
-		<style>
-			table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
-				border-right-width: 1px;
-			}
-		</style>
-		<section class="content-header">
+		return '<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-					<h1>Product Repack</h1>
+					<h1>Settings</h1>
 					</div>
 					<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="'.BASE_PATH.APP_FOLDER.'home">Home</a></li>
-						<li class="breadcrumb-item active">Transactions</li>
-						<li class="breadcrumb-item active">Product Repack</li>
+						<li class="breadcrumb-item active">Settings</li>
 					</ol>
 					</div>
 				</div>

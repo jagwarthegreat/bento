@@ -25,14 +25,20 @@ echo $ProductConvertClass->header();
         <table id="prod_convert_tbl" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th class="no-sort" style="width: 25px;"></th>
-                    <th style="width: 25px;"></th>
-                    <th style="width: 110px;">CONVERT #</th>
-                    <th>BRANCH</th>
-                    <th>ITEM</th>
-                    <th style="width: 150px;">FROM UNIT</th>
-                    <th style="width: 150px;">TO UNIT</th>
-                    <th style="width: 70px;">STATUS</th>
+                    <th rowspan="2" class="no-sort" style="width: 25px;"></th>
+                    <th rowspan="2" style="width: 25px;"></th>
+                    <th rowspan="2" style="vertical-align: middle;">REPACK CODE</th>
+                    <th rowspan="2" style="vertical-align: middle;">BRANCH</th>
+                    <th rowspan="2" style="vertical-align: middle;">ITEM</th>
+                    <th colspan="2" style="text-align: center;width: 80px;">FROM</th>
+                    <th colspan="2" style="text-align: center;width: 80px;">TO</th>
+                    <th rowspan="2" style="vertical-align: middle;width: 80px;">STATUS</th>
+                </tr>
+                <tr>
+                    <th style="width: 80px;">UNIT</th>
+                    <th style="width: 50px;">QTY</th>
+                    <th style="width: 80px;">UNIT</th>
+                    <th style="width: 50px;">QTY</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,11 +53,12 @@ echo $ProductConvertClass->header();
 </section>
 <!-- /.content -->
 <script>
-    $('title').html("Conversion");
+    $('title').html("Repack");
     $(function () {
         loadConversionData();
         $("#modal_width_po").css("max-width", "30%");
         $("#pc_detail_form").hide();
+        $('[data-toggle="tooltip"]').tooltip();
     });
     
     function addConvertModal() {
@@ -129,7 +136,7 @@ echo $ProductConvertClass->header();
                     loadConversionData();
                     $("#conversion_modal").modal('hide');
                 }else{
-                    alertme("error","Something wrong");
+                    alertMe("error","Something wrong");
                 }
             });
         }
@@ -160,7 +167,7 @@ echo $ProductConvertClass->header();
                     loadConversionData();
                     $("#conversion_detail_modal").modal('hide');
                 }else{
-                    alertme("error","Something wrong");
+                    alertMe("error","Something wrong");
                 }
             });
         }
@@ -232,44 +239,6 @@ echo $ProductConvertClass->header();
         });
     }
 
-    function removePoItem(id) {
-        var pc_header_id = $("#cur_pc_id").val();
-        var retVal = confirm("Are you sure to delete?");
-        if(retVal){
-            sql_data_delete('tbl_purchase_detail', "id = '"+id+"' AND pc_header_id = '"+pc_header_id+"'",'afterPoItemDelete',[pc_header_id]);
-        }
-    }
-
-    function afterPoItemDelete(id) {
-        success_delete();
-        purchaseDetailsView(id);
-    }
-
-    function finishPO() {
-        var pc_header_id = $("#cur_pc_id").val();
-        var retVal = confirm("Are you sure to finish this PO?");
-        if(retVal){
-            $("#finish_pc_btn").prop('disabled', true);
-            $("#finish_pc_btn").html("<span class='fa fa-spin fa-spinner'></span> loading...");
-
-            var pc_finish_data = "status = 1";
-            sql_data_update('tbl_purchase_header',pc_finish_data, "id = '"+pc_header_id+"'", 'afterFinish', [pc_header_id]);
-
-            $("#finish_pc_btn").prop('disabled', false);
-            $("#finish_pc_btn").html("Finish this Purchase Order");
-        }
-    }
-
-    function afterFinish(id) {
-        $("#pc_detail_info_section").css("display","none");
-        $("#sc_update_pc_header_btn").css("display","none");
-        $("#update_pc_date").prop("disabled", true);
-        $("#update_pc_remarks").prop("disabled", true);
-        $("#isFinish").html("");
-        purchaseDetailsView(id);
-        loadConversionData();
-    }
-
     function cancelConversion() {
         var cancel_convert_checks = $(".conversion_checkbox:checkbox:checked").map(function() {
             return this.value;
@@ -278,17 +247,20 @@ echo $ProductConvertClass->header();
         if(cancel_convert_checks.length < 1){
             alert("No item selected");
         }else{
-            // console.log(cancel_convert_checks);
-            $.post(controller+"cancel_conversion.php", {
-                cancel_convert_checks: cancel_convert_checks
-            },function(data) {
-                if(data == 1){
-                    alert("Conversion was closed!");
-                    loadConversionData();
-                }else{
-                    alert("Something went wrong");
-                }
-            });
+            var confrm_closed = confirm("Are you sure you want to close this repack entry?");
+            if(confrm_closed){
+                // console.log(cancel_convert_checks);
+                $.post(controller+"cancel_conversion.php", {
+                    cancel_convert_checks: cancel_convert_checks
+                },function(data) {
+                    if(data == 1){
+                        alert("Conversion was closed!");
+                        loadConversionData();
+                    }else{
+                        alert("Something went wrong");
+                    }
+                });
+            }
         }
     }
 
@@ -317,11 +289,18 @@ echo $ProductConvertClass->header();
                 },
                 {
                     "mRender": function(data,type,row){
-                        var conv_data = [
-                            "\""+row.ref_code+"\"",
-                            row.id
-                        ];
-                        return "<a href='#' onclick='getPcDetails("+conv_data+")'>"+row.ref_code+"</a>";
+                        var isClickable = "";
+                        if(row.status == 0){
+                            var conv_data = [
+                                "\""+row.ref_code+"\"",
+                                row.id
+                            ];
+
+                            isClickable += "onclick='getPcDetails("+conv_data+")'";
+                        }else{
+                            isClickable += 'data-toggle="tooltip" data-placement="right" title="'+row.convert_date+'"';
+                        }
+                        return "<a href='#' "+isClickable+">"+row.ref_code+"</a>";
                     },
                     "className": "text-center"
                 },
@@ -335,16 +314,46 @@ echo $ProductConvertClass->header();
                     "data": "from_unit"
                 },
                 {
+                    "data": "from_qty",
+                    "className": "text-right"
+                },
+                {
                     "data": "to_unit"
                 },
                 {
+                    "data": "to_qty",
+                    "className": "text-right"
+                },
+                {
                     "mRender": function(data,type,row){
-                        const stats = (row.status == 1) ? '<span style="color: green;">Finish</span>' : (row.status == 2)?'<span style="color: red;">Closed</span>':'<span style="color: orange;">Pending</span>';
+                        const stats = (row.status == 1) ? '<span style="color: green;">Finished</span>' : (row.status == 2)?'<span style="color: red;">Closed</span>':'<span style="color: orange;">Pending</span>';
                         return stats;
                     },
                     "className": "text-center"
                 }
             ]
         });
+    }
+
+    function finishProductConvert() {
+        var finish_conversion = confirm("Are you sure you want to finish repacking?");
+        if(finish_conversion){
+            $("#dt_fin_product_btn").prop("disabled", true);
+            $("#dt_fin_product_btn").html("<span class='fa fa-spin fa-spinner'></span> loading...");
+            var convert_code = $("#dt_convert_code").val();
+            $.post(controller+"finish_conversion.php", {
+                convert_code: convert_code
+            },function(data) {
+                if(data == 1){
+                    alertMe("success","Finished Repacking!");
+                    $("#conversion_detail_modal").modal('hide');
+                    loadConversionData();
+                }else{
+                    alertMe("error", "Something went wrong");
+                }
+                $("#dt_fin_product_btn").prop("disabled", false);
+                $("#dt_fin_product_btn").html("Finish Repack");
+            });
+        }
     }
 </script>

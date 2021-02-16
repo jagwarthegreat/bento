@@ -53,7 +53,7 @@ else if($routes == '/purchase'){
 	$views_file = VIEWS_FOLDER.$folder_file.'/purchase.php';
 	$active_li = trim($routes,'/');
 }
-else if($routes == '/product-convert'){
+else if($routes == '/product-repack'){
 	$folder_file = "module_folder";
 	$views_file = VIEWS_FOLDER.$folder_file.'/conversion.php';
 	$active_li = trim($routes,'/');
@@ -77,6 +77,11 @@ else if($routes == '/product-unit'){
 	$folder_file = "module_folder";
 	$views_file = VIEWS_FOLDER.$folder_file.'/product_unit.php';
 	$active_li = trim($routes,'/');
+}
+else if($routes == '/settings') {
+	$folder_file = "module_folder";
+	$views_file = VIEWS_FOLDER.$folder_file."/settings.php";
+	$active_li = trim($routes, '/');
 }
 /*
 	END OF MODULE
@@ -104,7 +109,7 @@ $master_tree = array(
 
 $transaction_tree = array(
 	'sales',
-	'product-convert',
+	'product-repack',
 	'purchase'
 );
 

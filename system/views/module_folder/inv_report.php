@@ -41,6 +41,7 @@ echo $ProdInvClass->header();
 </section>
 <!-- /.content -->
 <script>
+    $("title").html("Inventory Report");
     function generateReport() {
         var inv_date = $('#inv_date').val();
         var inv_cat = $('#inv_cat').val();

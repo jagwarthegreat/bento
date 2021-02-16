@@ -64,8 +64,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class='col-md-12'>
-                                        <button type='button' onclick='updateProductConvert()' id="dt_convert_product_btn" class='btn btn-success btn-sm float-right'>Save changes</button>
+                                    <div class='col-md-12 d-flex' style="flex-direction: row; justify-content: space-between;">
+                                        <button type='button' onclick='finishProductConvert()' id="dt_fin_product_btn" class='btn btn-primary btn-sm'>Finish Repack</button>
+                                        
+                                        <button type='button' onclick='updateProductConvert()' id="dt_convert_product_btn" class='btn btn-success btn-sm'>Save changes</button>
                                     </div>
                                 </div>
                             </div>

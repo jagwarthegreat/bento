@@ -2,18 +2,18 @@
 error_reporting(0);
 define("SYSTEM_NAME", "bento");
 define("BASE_NAME", "bento");
-define("BASE_PATH", "http://localhost:8000/".BASE_NAME."/");
+define("BASE_PATH", "http://localhost:8080/".BASE_NAME."/");
 define("APP_FOLDER", "system/");
 define("VIEWS_FOLDER", "views/");
 // GLOBALS DATABASE CONFIG AND OTHERS
-	$GLOBALS['config'] = array(
-		'mysql' => array(
+	$GLOBALS['config'] = [
+		'mysql' => [
 			'host'         => 'localhost',
 			'username'     => 'root',
 			'password'     => '',
 			'database'	   => 'bento'
-		)
-	);
+		]
+	];
 
 // CLASSES AND FUNCTIONS (inside directory)
 	define ("VALUE",serialize (array ("my_functions.php")));
@@ -75,6 +75,9 @@ define("VIEWS_FOLDER", "views/");
 				break;
 			case 'ProductUnitClass':
 				require_once 'core/classes/product.unit.class.php';
+				break;
+			case 'Settings':
+				require_once 'core/classes/settings.class.php';
 				break;
 			default:
 				break;
