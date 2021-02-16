@@ -28,19 +28,21 @@ echo $settings->header();
 
 								<div class="card-tools">
 									<div class="align-right">
-										<button type="button" onclick="openModal()" class="btn btn-secondary btn-sm">Add branch</button>
-										<button type="button" id="delete_branch_btn" class="btn btn-danger btn-sm" onclick="deleteBranch()">Delete selected branch</button>
+										<button type="button" onclick="openModal()" class="btn btn-secondary btn-sm">Add user</button>
+										<button type="button" id="delete_branch_btn" class="btn btn-danger btn-sm" onclick="deleteBranch()">Delete selected user</button>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="branch_tbl" class="table table-bordered table-striped">
+							<table id="users_tbl" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th class="no-sort" style="width: 25px;"></th>
 										<th style="width: 25px;"></th>
-										<th>BRANCH NAME</th>
+										<th>FULL NAME</th>
+										<th>USERNAME</th>
+										<th>EMAIL</th>
 										<th style="width: 90px;">STATUS</th>
 									</tr>
 								</thead>
@@ -69,15 +71,15 @@ $(function () {
 	loadSysUsersData();
 });
 function loadSysUsersData() {
-	$("#branch_tbl").DataTable().destroy();
-	$("#branch_tbl").DataTable({
+	$("#users_tbl").DataTable().destroy();
+	$("#users_tbl").DataTable({
 		"responsive": true,
 		"autoWidth": false,
 		"paging": true,
 		"dataSrc": "data",
 		"ajax": {
 			type: 'post',
-			url: controller+"branch_data.php"
+			url: controller+"users_data.php"
 		},
 		"columns": [
 			{
@@ -92,12 +94,18 @@ function loadSysUsersData() {
 			},
 			{
 				"mRender": function(data,type,row){
-					var dt_data = [
+					var usr_data = [
 						row.id,
-						"\""+row.br_name+"\""
+						"\""+row.name+"\""
 					];
-					return "<a href='#' onclick='branchDetail("+dt_data+")'>"+row.br_name+"</a>";
+					return "<a href='#' onclick='branchDetail("+usr_data+")'>"+row.name+"</a>";
 				}
+			},
+			{
+				"data": "username"
+			},
+			{
+				"data": "email"
 			},
 			{
 				"mRender": function(data,type,row){
