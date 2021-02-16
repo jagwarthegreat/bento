@@ -35,5 +35,27 @@ class Settings
 			</div>
 		</section>';
 	}
+
+	public function userTab()
+	{
+		return include __DIR__.'/../../views/module_folder/settings.users.php';
+	}
+
+	public function rolesTab()
+	{
+		return include __DIR__.'/../../views/module_folder/settings.roles.php';
+	}
+
+	public function prefTab()
+	{
+		return include __DIR__.'/../../views/module_folder/settings.users.php';
+	}
+
+	public function isActive($tab)
+	{
+		$current = $_SESSION['system']['settings']['activeTab'];
+		$active = ($current == "")?"users-tab":$current;
+		return ($tab == $active)?"show active":"";
+	}
 }
 ?>

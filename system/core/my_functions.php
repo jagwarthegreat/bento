@@ -256,4 +256,15 @@
 		$res = FM_SELECT_QUERY("qty","tbl_product_unit","id = '$unit_id'");
 		return $res[0];
 	}
+
+	function getAllEmployee($selected_id = "")
+	{
+		$data_q = FM_SELECT_LOOP_QUERY("*","tbl_employee","id > 0 ORDER BY fullname ASC");
+		foreach($data_q as $list){
+			$selected = ($selected_id == $list[id])?"selected":"";
+			$data .= "<option ".$selected." value='".$list[id]."'>".$list["fullname"]."</option>";
+		}
+		return $data;
+	}
+	
 ?>

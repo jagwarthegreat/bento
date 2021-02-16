@@ -46,7 +46,6 @@
   <script type="text/javascript" src="<?=BASE_PATH?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="<?=BASE_PATH?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script type="text/javascript" src="<?=BASE_PATH?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script type="text/javascript" src="<?=BASE_PATH?>assets/plugins/popper/popper.min.js"></script>
   <script type="text/javascript" src="<?=BASE_PATH?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
   
   <!-- overlayScrollbars -->

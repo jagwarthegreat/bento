@@ -46,7 +46,7 @@ require 'routes/routes.php';
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=BASE_PATH?>assets/dist/img/profile/default_user.png" class="img-circle elevation-2" alt="User Image">
+          <i class="fa fa-user" style="font-size: 30px;color: #c2c7d0;"></i>
         </div>
         <div class="info">
           <a href="<?=BASE_PATH.APP_FOLDER?>profile" class="d-block"><?=$_SESSION['system']['fullname']?></a>
@@ -114,6 +114,7 @@ require 'routes/routes.php';
   <?php include VIEWS_FOLDER.'module_folder/product_category_detail_modal.php'; ?>
   <?php include VIEWS_FOLDER.'module_folder/product_unit_modal.php'; ?>
   <?php include VIEWS_FOLDER.'module_folder/product_unit_detail.php'; ?>
+  <?php include VIEWS_FOLDER.'module_folder/users_modal.php'; ?>
 </div>
 </body>
 <script>
