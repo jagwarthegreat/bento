@@ -1,3 +1,3 @@
-# inv
+# Bento 
 
-INVENTORY TEMPLATE
+Inventory template for your store and small business.
