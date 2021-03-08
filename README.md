@@ -2,6 +2,7 @@
 
 Inventory template for your store and small business.
 
+### To do's
 - [x] purchase order
 - [x] product entries
 - [x] repack add
