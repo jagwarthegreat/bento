@@ -1,4 +1,5 @@
 <?php
+
 /**
  *   *=======*
  *         =*   *====*   *====*  *     *
@@ -12,11 +13,6 @@
  */
 class PurchaseClass
 {
-	function __construct($param = '')
-	{
-		
-	}
-
 	public function header()
 	{
 		return '<section class="content-header">
@@ -27,7 +23,7 @@ class PurchaseClass
 					</div>
 					<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="'.BASE_PATH.APP_FOLDER.'home">Home</a></li>
+						<li class="breadcrumb-item"><a href="' . BASE_PATH . APP_FOLDER . 'home">Home</a></li>
 						<li class="breadcrumb-item active">Transactions</li>
 						<li class="breadcrumb-item active">Purchase</li>
 					</ol>
@@ -37,4 +33,3 @@ class PurchaseClass
 		</section>';
 	}
 }
-?>

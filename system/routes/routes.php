@@ -4,90 +4,101 @@
 $base_name = BASE_NAME;
 $uri = $_SERVER['REQUEST_URI'];
 $request = explode('?', $_SERVER['REQUEST_URI'], 2);
-$routes = str_replace("/".$base_name."/system", "", $request[0]);
-$par_data = unserialize(urldecode($_GET[q]));
+$routes = str_replace("/" . $base_name . "/system", "", $request[0]);
+$par_data = unserialize(urldecode($_GET["q"]));
 
-$error_file = VIEWS_FOLDER.'error.php';
-if($routes == '/' || $routes == '' || $routes == '/home'){
-	$views_file = VIEWS_FOLDER.'home.php';
-	$active_li = "home";
-	$folder_file = "module_folder";
-}
+$error_file = VIEWS_FOLDER . 'error.php';
 
+// thi will load the routes
+$routeList = [
+	'' => [
+		"views_file" => '/home.php',
+		"active_li" => "home",
+		"folder_file" => "module_folder"
+	],
+	'/' => [
+		"views_file" => '/home.php',
+		"active_li" => "home",
+		"folder_file" => "module_folder"
+	],
+	'/home' => [
+		"views_file" => '/home.php',
+		"active_li" => "home",
+		"folder_file" => "module_folder"
+	],
+	'/module-link' => [
+		"views_file" => '/module_view.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/profile' => [
+		"views_file" => '/profile.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/supplier' => [
+		"views_file" => '/supplier_view.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/branch' => [
+		"views_file" => '/branch_view.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/employee' => [
+		"views_file" => '/employee.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/product' => [
+		"views_file" => '/module_view.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/purchase' => [
+		"views_file" => '/purchase.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/product-repack' => [
+		"views_file" => '/conversion.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/prod-inv' => [
+		"views_file" => '/inv_report.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/srp-entry' => [
+		"views_file" => '/srp_entry.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/product-category' => [
+		"views_file" => '/product_category.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/product-unit' => [
+		"views_file" => '/product_unit.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/settings' => [
+		"views_file" => '/settings.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	]
+];
 
-/*
-	START OF MODULE
-*/
-else if($routes == '/module-link'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/module_view.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/profile'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/profile.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/supplier'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/supplier_view.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/branch'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/branch_view.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/employee'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/employee.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/product'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/product.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/purchase'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/purchase.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/product-repack'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/conversion.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/prod-inv'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/inv_report.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/srp-entry'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/srp_entry.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/product-category'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/product_category.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/product-unit'){
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file.'/product_unit.php';
-	$active_li = trim($routes,'/');
-}
-else if($routes == '/settings') {
-	$folder_file = "module_folder";
-	$views_file = VIEWS_FOLDER.$folder_file."/settings.php";
-	$active_li = trim($routes, '/');
-}
-/*
-	END OF MODULE
-*/
-
-else{
+// check the routes the n route to views
+if (array_key_exists($routes, $routeList)) {
+	$folder_file = $routeList[$routes]["folder_file"];
+	$views_file = VIEWS_FOLDER . $folder_file . $routeList[$routes]["views_file"];
+	$active_li = $routeList[$routes]["active_li"];
+} else {
 	$views_file = $error_file;
 }
 

@@ -10,31 +10,31 @@ $inv_cat = $_REQUEST['cat'];
 $response['unit'] = array();
 $unit_result = FM_SELECT_LOOP_QUERY('*', 'tbl_product_unit', "category = '$inv_cat' ORDER BY qty ASC");
 $count_unit = 0;
-foreach($unit_result as $ulist){
+foreach ($unit_result as $ulist) {
     $count_unit++;
     $plist = array(
-        'package_id' => (int) $ulist[id],
-        'qty' => (float) $ulist[qty],
-        'package_name' => getProdUnit($ulist[id])
+        'package_id' => (int) $ulist['id'],
+        'qty' => (float) $ulist['qty'],
+        'package_name' => getProdUnit($ulist['id'])
     );
-    array_push($response['unit'],$plist);
+    array_push($response['unit'], $plist);
 }
 
 $response['items'] = array();
 $result = FM_SELECT_LOOP_QUERY('*', 'tbl_products', "branch = '$current_branch' AND category = '$inv_cat' ORDER BY name ASC");
 $grandTotal = 0;
-foreach($result as $item){
+foreach ($result as $item) {
     $list = array();
-    $list['product_id'] = $item[id];
+    $list['product_id'] = $item['id'];
     $list['product_name'] = $item['name'];
     $list['srp'] = number_format($item['selling_price'], 2);
     $list['inv'] = array();
     $balance = 0;
     $q = mysql_query("SELECT * FROM tbl_product_unit WHERE category = '$inv_cat'");
-    while($row = mysql_fetch_array($q)){
-        $perunit = (float) getInvPerUnit($inv_date, $current_branch, $item[id], $row[id]);
-        $list['inv'][$row[id]] = $perunit;
-        $balance += ($perunit*$row[qty])*$item['selling_price'];
+    while ($row = mysql_fetch_array($q)) {
+        $perunit = (float) getInvPerUnit($inv_date, $current_branch, $item['id'], $row['id']);
+        $list['inv'][$row['id']] = $perunit;
+        $balance += ($perunit * $row['qty']) * $item['selling_price'];
     }
 
     $grandTotal += $balance;

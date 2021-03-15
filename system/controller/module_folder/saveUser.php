@@ -18,5 +18,5 @@ $data = [
 	"email" => $user_email
 ];
 
-$res = FM_INSERT_QUERY("tbl_users",$data);
+$res = FM_INSERT_QUERY("tbl_users", $data);
 echo $res;

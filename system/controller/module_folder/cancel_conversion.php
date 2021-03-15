@@ -6,5 +6,5 @@ $checkIds = implode("','", $cancel_convert_checks);
 $data = array(
     "status"    => 2
 );
-$res = FM_UPDATE_QUERY("tbl_product_convert",$data, "id IN('$checkIds')");
+$res = FM_UPDATE_QUERY("tbl_product_convert", $data, "id IN('$checkIds')");
 echo $res;

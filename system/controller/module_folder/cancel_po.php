@@ -6,5 +6,5 @@ $checkIds = implode("','", $cancel_po_checks);
 $data = array(
     "status"    => 2
 );
-$res = FM_UPDATE_QUERY("tbl_purchase_header",$data, "id IN('$checkIds')");
+$res = FM_UPDATE_QUERY("tbl_purchase_header", $data, "id IN('$checkIds')");
 echo $res;

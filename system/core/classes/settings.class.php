@@ -1,4 +1,5 @@
 <?php
+
 /**
  *   *=======*
  *         =*   *====*   *====*  *     *
@@ -12,11 +13,6 @@
  */
 class Settings
 {
-	function __construct($param = '')
-	{
-		
-	}
-
 	public function header()
 	{
 		return '<section class="content-header">
@@ -27,7 +23,7 @@ class Settings
 					</div>
 					<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="'.BASE_PATH.APP_FOLDER.'home">Home</a></li>
+						<li class="breadcrumb-item"><a href="' . BASE_PATH . APP_FOLDER . 'home">Home</a></li>
 						<li class="breadcrumb-item active">Settings</li>
 					</ol>
 					</div>
@@ -38,24 +34,23 @@ class Settings
 
 	public function userTab()
 	{
-		return include __DIR__.'/../../views/module_folder/settings.users.php';
+		return include __DIR__ . '/../../views/module_folder/settings.users.php';
 	}
 
 	public function rolesTab()
 	{
-		return include __DIR__.'/../../views/module_folder/settings.roles.php';
+		return include __DIR__ . '/../../views/module_folder/settings.roles.php';
 	}
 
 	public function prefTab()
 	{
-		return include __DIR__.'/../../views/module_folder/settings.users.php';
+		return include __DIR__ . '/../../views/module_folder/settings.users.php';
 	}
 
 	public function isActive($tab)
 	{
 		$current = $_SESSION['system']['settings']['activeTab'];
-		$active = ($current == "")?"users-tab":$current;
-		return ($tab == $active)?"show active":"";
+		$active = ($current == "") ? "users-tab" : $current;
+		return ($tab == $active) ? "show active" : "";
 	}
 }
-?>

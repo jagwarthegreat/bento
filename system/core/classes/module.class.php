@@ -1,4 +1,5 @@
 <?php
+
 /**
  *   *=======*
  *         =*   *====*   *====*  *     *
@@ -12,11 +13,6 @@
  */
 class ModuleClass
 {
-	function __construct($param = '')
-	{
-		
-	}
-
 	public function header()
 	{
 		return '<section class="content-header">
@@ -36,4 +32,3 @@ class ModuleClass
 		</section>';
 	}
 }
-?>

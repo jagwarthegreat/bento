@@ -1,3 +1,11 @@
 <?php
 
-echo "<script>window.location = 'auth/'; </script>";
+/**
+ * Bento - A inventory system for your store
+ *
+ * @package  Bento
+ * @author   Judywen Guapin
+ */
+
+header("Location: auth/");
+exit();

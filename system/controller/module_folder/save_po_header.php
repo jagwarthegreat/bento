@@ -12,5 +12,5 @@ $form_data = array(
     "remarks" => $po_remarks,
     "date" => $po_date
 );
-$response = FM_INSERT_QUERY('tbl_purchase_header', $form_data , "Y");
+$response = FM_INSERT_QUERY('tbl_purchase_header', $form_data, "Y");
 echo $response;
