@@ -46,7 +46,7 @@ foreach (unserialize(VALUE) as $val) {
 
 // THIS WILL LOAD ONLY THE NEEDED CLASS
 spl_autoload_register(function ($class) {
-	include BASE_PATH . 'autoloader.php';
+	include __DIR__ . '/../autoloader.php';
 	if (array_key_exists($class, $classes)) {
 		require_once $classes[$class];
 	}

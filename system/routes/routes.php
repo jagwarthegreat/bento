@@ -52,7 +52,7 @@ $routeList = [
 		"folder_file" => "module_folder"
 	],
 	'/product' => [
-		"views_file" => '/module_view.php',
+		"views_file" => '/product.php',
 		"active_li" => trim($routes, '/'),
 		"folder_file" => "module_folder"
 	],
@@ -88,6 +88,11 @@ $routeList = [
 	],
 	'/settings' => [
 		"views_file" => '/settings.php',
+		"active_li" => trim($routes, '/'),
+		"folder_file" => "module_folder"
+	],
+	'/sales' => [
+		"views_file" => '/sales.php',
 		"active_li" => trim($routes, '/'),
 		"folder_file" => "module_folder"
 	]
@@ -126,5 +131,5 @@ $transaction_tree = array(
 
 $report_tree = array(
 	'prod-inv',
-	'sales'
+	'sales-report'
 );

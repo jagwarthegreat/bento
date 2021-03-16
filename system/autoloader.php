@@ -15,7 +15,8 @@ $classes = [
     "PurchaseClass" => "core/classes/purchase.class.php",
     "ProductConvertClass" => "core/classes/prod_convert.class.php",
     "ProdInvClass" => "core/classes/prod_inv.class.php",
-    "ProductCatClass" => "core/classes/profile.class.php",
+    "ProductCatClass" => "core/classes/product.cat.class.php",
     "ProductUnitClass" => "core/classes/product.unit.class.php",
-    "Settings" => "core/classes/settings.class.php"
+    "Settings" => "core/classes/settings.class.php",
+    "SalesClass" => "core/classes/sales.class.php",
 ];
