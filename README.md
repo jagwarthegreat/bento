@@ -7,7 +7,7 @@ Inventory template for your store and small business.
 - [x] product entries
 - [x] repack add
 - [ ] sales
-- [ ] finish repack
+- [x] finish repack
 - [ ] logs
 - [ ] sales report
 - [ ] system settings
